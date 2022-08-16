@@ -18,8 +18,27 @@ config.vm.box = "ubuntu/xenial64"
           SHELL
     end
     # Database Server
-    config.vm.define "dbserver" do |dbserver|
-        dbserver.vm.hostname = "database-tz"
-        
+    config.vm.define "databaseserver" do |databaseserver|
+        databaseserver.vm.hostname = "database-tz"
+    
+    databaseserver.vm.network "private_network", ip: "192.168.2.12"
+    databaseserver.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
+
+    dbserver.vm.provision "shell", inline: <<-SHELL
+      apt-get update
+      export MYSQL_PWD='root1234'
+      echo "mysql-server mysql-server/root_password password $MYSQL_PWD" | debconf-set-selections 
+      echo "mysql-server mysql-server/root_password_again password $MYSQL_PWD" | debconf-set-selections
+      apt-get -y install mysql-server
+      echo "CREATE DATABASE currencies;" | mysql
+      echo "CREATE USER 'user'@'%' IDENTIFIED BY 'root1234';" | mysql
+      echo "GRANT ALL PRIVILEGES ON timezones.* TO 'webuser'@'%'" | mysql
+      export MYSQL_PWD='root1234'
+
+    SHELL
+  end
+
+
+
 
 end
