@@ -17,5 +17,9 @@ config.vm.box = "ubuntu/xenial64"
               service apache2 reload
           SHELL
     end
+    # Database Server
+    config.vm.define "dbserver" do |dbserver|
+        dbserver.vm.hostname = "database-tz"
+        
 
 end
