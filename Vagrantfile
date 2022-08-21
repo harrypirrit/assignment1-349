@@ -19,7 +19,7 @@ config.vm.box = "ubuntu/xenial64"
     end
     # Database Server
     config.vm.define "databaseserver" do |databaseserver|
-        databaseserver.vm.hostname = "database-tz"
+        databaseserver.vm.hostname = "databaseserver"
     
     databaseserver.vm.network "private_network", ip: "192.168.2.12"
     databaseserver.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
