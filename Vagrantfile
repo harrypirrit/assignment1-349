@@ -4,12 +4,12 @@ Vagrant.configure("2") do |config|
     
     
         # Currency Web Server
-        config.vm.define "adminserver" do |adminserver|
-          adminserver.vm.hostname = "adminserver-tz"
-          adminserver.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
-          adminserver.vm.network "private_network", ip: "192.168.2.11"
-          adminserver.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
-          adminserver.vm.provision "shell", inline: <<-SHELL
+        config.vm.define "webserver" do |webserver|
+          webserver.vm.hostname = "webserver-tz"
+          webserver.vm.network "forwarded_port", guest: 80, host: 1234, host_ip: "127.0.0.1"
+          webserver.vm.network "private_network", ip: "192.168.2.11"
+          webserver.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
+          webserver.vm.provision "shell", inline: <<-SHELL
              apt-get update
                   apt-get install -y apache2 php libapache2-mod-php php-mysql
                   cp /vagrant/test-website.conf /etc/apache2/sites-available/
@@ -18,5 +18,29 @@ Vagrant.configure("2") do |config|
                   service apache2 reload
               SHELL
         end
+  
+        #Currency converter database
+          config.vm.define "databaseserver" do |databaseserver|
+      
+        databaseserver.vm.hostname = "databaseserver-cc"
+        
+        databaseserver.vm.network "private_network", ip: "192.168.2.12"
+        databaseserver.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
+        
+        databaseserver.vm.provision "shell", inline: <<-SHELL
+          apt-get update
+          export MYSQL_PWD='root123'
+          echo "mysql-server mysql-server/root_password password $MYSQL_PWD" | debconf-set-selections 
+          echo "mysql-server mysql-server/root_password_again password $MYSQL_PWD" | debconf-set-selections
+          apt-get -y install mysql-server
+          echo "CREATE DATABASE currencies;" | mysql
+          echo "CREATE USER 'user'@'%' IDENTIFIED BY 'root123';" | mysql
+          echo "GRANT ALL PRIVILEGES ON currencies.* TO 'user'@'%'" | mysql
+          export MYSQL_PWD='root123'
+          cat /vagrant/database-cc-setup.sql | mysql -u user currencies
+          sed -i'' -e '/bind-address/s/127.0.0.1/0.0.0.0/' /etc/mysql/mysql.conf.d/mysqld.cnf
+          service mysql restart
+        SHELL
+      end
     
     end
