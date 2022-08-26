@@ -6,7 +6,6 @@
 
   <body>
   <p> <?php $currency = file_get_contents("http://192.168.2.13?currency=NZD");?></p>
-  <p> New Zealand Currency: <?php echo "$currency"; ?></p>
 
 
   <?php
@@ -30,29 +29,27 @@
 
       $pdo = new PDO($pdo_dsn, $database_user, $databse_password);
 
-       $pdo_dsn = "mysql:host=$database_host;dbname=$database_name";
-
        if($currency == "NZD"){
-        $NZD = file_get_contents("http://192.168.2.11?currency=NZD");
+        $NZD = file_get_contents("http://192.168.2.13?currency=NZD");
         $_SESSION['currencies'] = "<p> New Zealand Dollar: $NZD </p>";
         $q = $pdo->query("UPDATE currencies SET defaultCurrency = 'NZD' WHERE userID='User'");
       } else if($currency == "AUD"){
-      $AUD = file_get_contents("http://192.168.2.11?currency=AUD");
+      $AUD = file_get_contents("http://192.168.2.13?currency=AUD");
       $_SESSION['currencies'] = "<p> Australian Dollar: $AUD </p>";
       $q = $pdo->query("UPDATE currencies SET defaultCurrency = 'AUD' WHERE userID='User'");
 
     } else if($currency == "USD"){
-        $USD = file_get_contents("http://192.168.2.11?currency=USD");
+        $USD = file_get_contents("http://192.168.2.13?currency=USD");
         $_SESSION['currencies'] = "<p> United States Dollar: $USD </p>";
         $q = $pdo->query("UPDATE currencies SET defaultCurrency = 'USD' WHERE userID='User'");
 
     } else if($currency == "GBP"){
-        $GBP = file_get_contents("http://192.168.2.11?currency=GBP");
+        $GBP = file_get_contents("http://192.168.2.13?currency=GBP");
         $_SESSION['currencies'] = "<p> Great British Pound: $GBP </p>";
         $q = $pdo->query("UPDATE currencies SET defaultCurrency = 'GBP' WHERE userID='User'");
 
     } else if($currency == "KRW"){
-        $KRW = file_get_contents("http://192.168.2.11?currency=KRW");
+        $KRW = file_get_contents("http://192.168.2.13?currency=KRW");
         $_SESSION['currencies'] = "<p> South Korean Won: $KRW </p>";
         $q = $pdo->query("UPDATE currencies SET defaultCurrency = 'KRW' WHERE userID='User'");
     }
@@ -77,7 +74,7 @@
 
         </form>
 
-  <p id="output">1.00 NZD = <?php echo $converted ?></p>
+  
 
 <?php
     $database_host = '192.168.2.12';
@@ -117,9 +114,12 @@
         
 
         <?php
-          echo $_SESSION['currency'];
-          $_SESSION['currency'] = "";
+          echo $_SESSION['currencies'];
+          $_SESSION['currencies'] = "";
           ?>
+
+
+
 
 
 </body>
