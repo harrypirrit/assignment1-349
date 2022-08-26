@@ -7,6 +7,19 @@
   <body>
   <p> <?php $currency = file_get_contents("http://192.168.2.13?currency=NZD");?></p>
   <p> New Zealand Currency: <?php echo "$currency"; ?></p>
+  <form action="index.php" method="post">
+
+            <p> Convert From NZD to:
+            <select name="currency">
+          <option value="AUD" <?php getSelectSession("currency", "AUD"); ?>>Australian Dollar</option>
+          <option value="USD" <?php getSelectSession("currency", "USD"); ?>>United States Dollar</option>
+          <option value="GBP" <?php getSelectSession("currency", "GBP"); ?>>Great British Pound</option>
+          <option value="KRW" <?php getSelectSession("currency", "KRW"); ?>>South Korean Won</option>
+        </select>
+
+        <input type="submit" name="Convert" value="Convert"></input>
+
+        </form>
 
   <p id="output"></p>
   <?php
@@ -92,19 +105,12 @@
         }
         ?>
 
-        <form action="index.php" method="post">
+        
 
-            <p> Convert From NZD to:
-            <select name="timezone">
-          <option value="AUD" <?php getSelectSession("time", "AUD"); ?>>Australian Dollar</option>
-          <option value="USD" <?php getSelectSession("time", "USD"); ?>>United States Dollar</option>
-          <option value="GBP" <?php getSelectSession("time", "GBP"); ?>>Great British Pound</option>
-          <option value="KRW" <?php getSelectSession("time", "KRW"); ?>>South Korean Won</option>
-        </select>
-
-        <input type="submit" name="Convert" value="Convert"></input>
-
-        </form>
+        <?php
+          echo $_SESSION['currency'];
+          $_SESSION['currency'] = "";
+          ?>
 
 
 </body>
