@@ -15,7 +15,12 @@
     $pdo = new PDO($pdo_dsn, $database_user, $databse_password);
 
   // get the updateCount
-    $NZDcount = $pdo->query("SELECT counts from counts WHERE ");
+    $NZDcount = $pdo->query("SELECT a.tally from counters, currencies WHERE defaultCurrency = 'NZD'");
+    $AUDcount = $pdo->query("SELECT a.tally from counters a INNER JOIN currencies b ON b.defaultCurrency = b.defaultCurrency WHERE defaultCurrency = 'AUD'");
+    echo $AUDcount
+    $USDcount = $pdo->query("SELECT tally from counters, currencies WHERE defaultCurrency = 'USD'");
+    $GBPcount = $pdo->query("SELECT tally from counters, currencies WHERE defaultCurrency = 'GBP'");
+    $KRWcount = $pdo->query("SELECT tally from counters, currencies WHERE defaultCurrency = 'KRW'");
 
 
 

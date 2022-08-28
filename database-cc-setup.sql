@@ -5,7 +5,8 @@ CREATE TABLE currencies (
 
 CREATE TABLE counters (
     id varchar2(10),
-    tally int(255)
+    tally int(255),
+    defaultCurrency varchar(3)
 );
 
 
