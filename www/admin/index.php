@@ -15,14 +15,11 @@
     $pdo = new PDO($pdo_dsn, $database_user, $databse_password);
 
   // get the updateCount
-    $NZDcount = $pdo->query("SELECT a.tally from counters, currencies WHERE defaultCurrency = 'NZD'");
-    $AUDcount = $pdo->query("SELECT a.tally from counters a INNER JOIN currencies b ON b.defaultCurrency = b.defaultCurrency WHERE defaultCurrency = 'AUD'");
-    echo $AUDcount
-    $USDcount = $pdo->query("SELECT tally from counters, currencies WHERE defaultCurrency = 'USD'");
-    $GBPcount = $pdo->query("SELECT tally from counters, currencies WHERE defaultCurrency = 'GBP'");
-    $KRWcount = $pdo->query("SELECT tally from counters, currencies WHERE defaultCurrency = 'KRW'");
-
-
+    $NZDcount = $pdo->query("SELECT tally from counters WHERE id = 'NZD'")
+    $AUDcount = $pdo->query("SELECT tally from counters WHERE id = 'AUD'")
+    $USDcount = $pdo->query("SELECT tally from counters WHERE id = 'USD'")
+    $GBPcount = $pdo->query("SELECT tally from counters WHERE id = 'GBP'")
+    $KRWcount = $pdo->query("SELECT tally from counters WHERE id = 'KRW'")  
 
     // set the base and currency values 
     $base = 1;
@@ -35,7 +32,7 @@
     // conditionals for each POSTed currency
     if(strcmp($_GET['currency'], "NZD" ) == 0){
       $converted = $base * $NZD;
-      // $pdo->query("UPDATE 
+      // $pdo->query("UPDATE counters SET tally = tally+1 WHERE id = "NZD";")
       echo $converted;
       }
 
