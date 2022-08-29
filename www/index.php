@@ -56,9 +56,6 @@
 }
 
 ?>
-
-
-
   <form action="index.php" method="post">
 
             <p> Convert 1.00 NZD to:

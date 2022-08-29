@@ -10,3 +10,9 @@ CREATE TABLE counters (
 
 
 INSERT INTO currencies VALUES ('User', 'NZD')
+
+INSERT INTO counters VALUES ('NZD', 0)
+INSERT INTO counters VALUES ('AUD', 0)
+INSERT INTO counters VALUES ('USD', 0)
+INSERT INTO counters VALUES ('GBP', 0)
+INSERT INTO counters VALUES ('KRW', 0)
