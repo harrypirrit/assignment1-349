@@ -59,6 +59,12 @@
       $converted = $base * $KRW;
       echo $converted;
       }
-
           ?>
+    <hr>
+    
+    <h3> Number of NZD to NZD Conversions : <?php echo $NZDcount ?> </h3>
+    <h3> Number of NZD to AUD Conversions : <?php echo $AUDcount ?> </h3>
+    <h3> Number of NZD to USD Conversions : <?php echo $USDcount ?> </h3>
+    <h3> Number of NZD to GBP Conversions : <?php echo $GBPcount ?> </h3>
+    <h3> Number of NZD to KRW Conversions : <?php echo $KRWcount ?> </h3>
       </html>
