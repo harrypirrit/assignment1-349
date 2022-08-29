@@ -32,26 +32,30 @@
     // conditionals for each POSTed currency
     if(strcmp($_GET['currency'], "NZD" ) == 0){
       $converted = $base * $NZD;
-      // $pdo->query("UPDATE counters SET tally = tally+1 WHERE id = "NZD";")
+      $pdo->query("UPDATE counters SET tally = tally+1 WHERE id = "NZD";")
       echo $converted;
       }
 
     if(strcmp($_GET['currency'], "AUD" ) == 0){
       $converted = $base * $AUD;
+      $pdo->query("UPDATE counters SET tally = tally+1 WHERE id = "AUD";")
       echo $converted;
     }
     
     if(strcmp($_GET['currency'], "USD" ) == 0){
       $converted = $base * $USD;
+      $pdo->query("UPDATE counters SET tally = tally+1 WHERE id = "USD";")
       echo $converted;
       }
 
     if(strcmp($_GET['currency'], "GBP" ) == 0){
+      $pdo->query("UPDATE counters SET tally = tally+1 WHERE id = "GBP";")
       $converted = $base * $GBP;
       echo $converted;
       }
 
     if(strcmp($_GET['currency'], "KRW" ) == 0){
+      $pdo->query("UPDATE counters SET tally = tally+1 WHERE id = "KRW";")
       $converted = $base * $KRW;
       echo $converted;
       }
