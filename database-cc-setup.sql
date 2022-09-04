@@ -9,7 +9,7 @@ CREATE TABLE counters (
 );
 
 
-INSERT INTO currencies VALUES ('User', 'NZD')
+INSERT INTO currencies VALUES ('NZD', 0)
 
 INSERT INTO counters VALUES ('NZD', 0)
 INSERT INTO counters VALUES ('AUD', 0)
