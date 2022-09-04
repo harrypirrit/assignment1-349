@@ -13,6 +13,14 @@
 
   // get the updateCount
     $NZDcount = $pdo->query("SELECT tally from counters WHERE id = 'NZD'");
+    
+   // select a particular user by id
+   $sql = "SELECT tally FROM counters ORDER BY id";
+   foreach ($conn->query($sql) as $row) {
+      print $row['id'] . "\t";
+      print $row['name'] . "\t";
+   }
+   
     $AUDcount = $pdo->query("SELECT tally from counters WHERE id = 'AUD'");
     $USDcount = $pdo->query("SELECT tally from counters WHERE id = 'USD'");
     $GBPcount = $pdo->query("SELECT tally from counters WHERE id = 'GBP'");
