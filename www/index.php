@@ -6,41 +6,28 @@
 
   <body>
   <p> <?php $currency = file_get_contents("http://192.168.2.13?currency=NZD");?></p>
-  <p> New Zealand Currency: <?php echo "$currency"; ?></p>
-  <form action="index.php" method="post">
 
-            <p> Convert From NZD to:
-            <select name="currency">
-          <option value="AUD" <?php getSelectSession("currency", "AUD"); ?>>Australian Dollar</option>
-          <option value="USD" <?php getSelectSession("currency", "USD"); ?>>United States Dollar</option>
-          <option value="GBP" <?php getSelectSession("currency", "GBP"); ?>>Great British Pound</option>
-          <option value="KRW" <?php getSelectSession("currency", "KRW"); ?>>South Korean Won</option>
-        </select>
 
-        <input type="submit" name="Convert" value="Convert"></input>
-
-        </form>
-
-  <p id="output"></p>
   <?php
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+
     session_start();
 
     if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['Convert'])){
-        func();
+        update_db();
     }
 
-  function func(){
+  function update_db(){
       $currency = $_POST['currency'];
       $database_host = '192.168.2.12';
       $database_name = 'currencies';
       $database_user = 'user';
       $databse_password = 'root123';
 
-      $pdo_dsn = "mysql:host=$datab_host;dbname=$database_name";
+      $pdo_dsn = "mysql:host=$database_host;dbname=$database_name";
 
       $pdo = new PDO($pdo_dsn, $database_user, $databse_password);
-
-       $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
 
        if($currency == "NZD"){
         $NZD = file_get_contents("http://192.168.2.13?currency=NZD");
@@ -69,6 +56,22 @@
 }
 
 ?>
+  <form action="index.php" method="post">
+
+            <p> Convert 1.00 NZD to:
+            <select name="currency">
+          <option value="NZD" <?php getSelectSession("currency", "NZD"); ?>>New Zealand Dollar</option>
+          <option value="AUD" <?php getSelectSession("currency", "AUD"); ?>>Australian Dollar</option>
+          <option value="USD" <?php getSelectSession("currency", "USD"); ?>>United States Dollar</option>
+          <option value="GBP" <?php getSelectSession("currency", "GBP"); ?>>Great British Pound</option>
+          <option value="KRW" <?php getSelectSession("currency", "KRW"); ?>>South Korean Won</option>
+        </select>
+
+        <input type="submit" name="Convert" value="Convert"></input>
+
+        </form>
+
+  
 
 <?php
     $database_host = '192.168.2.12';
@@ -76,7 +79,7 @@
     $database_user = 'user';
     $databse_password = 'root123';
 
-    $pdo_dsn = "mysql:host=$datab_host;dbname=$database_name";
+    $pdo_dsn = "mysql:host=$database_host;dbname=$database_name";
 
     $pdo = new PDO($pdo_dsn, $database_user, $databse_password);
 
@@ -108,9 +111,12 @@
         
 
         <?php
-          echo $_SESSION['currency'];
-          $_SESSION['currency'] = "";
+          echo $_SESSION['currencies'];
+          $_SESSION['currencies'] = "";
           ?>
+
+
+
 
 
 </body>
