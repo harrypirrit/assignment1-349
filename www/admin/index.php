@@ -1,9 +1,6 @@
 <html>
 <?php
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
    // connect to DB
     $database_host = '192.168.2.12';
     $database_name = 'kounters';

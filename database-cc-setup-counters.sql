@@ -1,3 +1,5 @@
+DROP TABLE kounters;
+
 CREATE TABLE kounters (
     id varchar(3),
     tally int(255),
