@@ -35,10 +35,13 @@ Vagrant.configure("2") do |config|
           echo "mysql-server mysql-server/root_password_again password $MYSQL_PWD" | debconf-set-selections
           apt-get -y install mysql-server
           echo "CREATE DATABASE currencies;" | mysql
+          echo "CREATE DATABASE kounters;" | mysql
           echo "CREATE USER 'user'@'%' IDENTIFIED BY 'root123';" | mysql
           echo "GRANT ALL PRIVILEGES ON currencies.* TO 'user'@'%'" | mysql
+          echo "GRANT ALL PRIVILEGES ON kounters.* TO 'user'@'%'" | mysql
           export MYSQL_PWD='root123'
-          cat /vagrant/database-cc-setup.sql | mysql -u user currencies
+          cat /vagrant/database-cc-setup-currencies.sql | mysql -u user currencies
+          cat /vagrant/database-cc-setup-counters.sql | mysql -u user kounters
           sed -i'' -e '/bind-address/s/127.0.0.1/0.0.0.0/' /etc/mysql/mysql.conf.d/mysqld.cnf
           service mysql restart
         SHELL
