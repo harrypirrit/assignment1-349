@@ -1,4 +1,3 @@
-DROP TABLE kounters;
 
 CREATE TABLE kounters (
     id varchar(3),

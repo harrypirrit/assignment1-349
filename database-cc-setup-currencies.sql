@@ -1,3 +1,4 @@
+
 CREATE TABLE currencies (
     userID varchar(10),
     defaultCurrency varchar(3),
