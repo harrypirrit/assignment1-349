@@ -1,10 +1,10 @@
-DROP TABLE kounters;
 
-CREATE TABLE kounters (
-    id varchar(3),
-    tally int(255),
+
+Create table kounters (
+    id VARCHAR(3),
+    tally INT(255),
     PRIMARY KEY (id)
-);
+)
 
 INSERT INTO kounters VALUES ('NZD', 0);
 INSERT INTO kounters VALUES ('AUD', 0);
